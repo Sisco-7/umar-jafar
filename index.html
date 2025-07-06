@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Umar Jafar | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        :root {
+            --primary: #F97316; /* Vibrant Orange */
+            --secondary: #EA580C; /* Deep Orange */
+            --accent: #FDBA74; /* Light Orange */
+            --background: #1E293B; /* Deep Slate Background */
+            --text-light: #F8FAFC;
+            --text-dark: #1E3A8A;
+            --glass: rgba(255, 255, 255, 0.1);
+            --glass-hover: rgba(255, 255, 255, 0.2);
+            --shadow: rgba(0, 0, 0, 0.3);
+            --glow: rgba(249, 115, 22, 0.6);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            font-family: 'Poppins', 'Inter', sans-serif;
+            background: var(--background);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        .tech-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: radial-gradient(circle at center, rgba(249, 115, 22, 0.15) 0%, var(--background) 70%);
+            overflow: hidden;
+        }
+
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: var(--text-light);
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); opacity: 0.5; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-100vh); opacity: 0.5; }
+        }
+
+        .main-container {
+            position: relative;
+            z-index: 1;
+            padding-bottom: 80px;
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        .nav-bar {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 2px solid var(--secondary);
+            border-radius: 50px;
+            padding: 12px 30px;
+            z-index: 1000;
+            display: flex;
+            gap: 25px;
+            box-shadow: 0 8px 25px var(--shadow);
+        }
+
+        .nav-item {
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            font-size: 1em;
+            font-weight: 500;
+            color: var(--text-light);
+            text-transform: uppercase;
+        }
+
+        .nav-item:hover {
+            background: var(--glass-hover);
+            transform: scale(1.05);
+        }
+
+        .nav-item.active {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            box-shadow: 0 4px 15px var(--glow);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 120px 20px 60px;
+            position: relative;
+        }
+
+        .hero-title {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--text-light), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: titleGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            0% { filter: drop-shadow(0 0 10px rgba(249, 115, 22, 0.6)); }
+            100% { filter: drop-shadow(0 0 25px rgba(253, 186, 116, 0.9)); }
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            opacity: 0.9;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease 0.5s both;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .section {
+            margin-bottom: 80px;
+        }
+
+        .section-title {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .about-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 2px solid var(--secondary);
+            border-radius: 20px;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.1), rgba(253, 186, 116, 0.1));
+            z-index: -1;
+        }
+
+        .about-text {
+            color: var(--text-light);
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .highlight-text {
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .skills-grid, .projects-grid, .certifications-grid, .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 2px solid var(--accent);
+            border-radius: 20px;
+            padding: 30px;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 8px 30px var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .card-icon {
+            font-size: 2.2em;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px var(--glow);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .card-title {
+            font-size: 1.6em;
+            font-weight: 600;
+            color: var(--text-light);
+        }
+
+        .card-description {
+            color: var(--text-light);
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+        .card-content {
+            margin-top: 15px;
+        }
+
+        .project-link {
+            display: inline-block;
+            margin-top: 10px;
+            color: var(--secondary);
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            color: var(--text-light);
+            transform: translateX(5px);
+        }
+
+        .testimonials-container {
+            position: relative;
+            overflow: hidden;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .testimonials-slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .testimonial-card {
+            flex: 0 0 100%;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 2px solid var(--secondary);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            opacity: 0;
+            animation: slideIn 0.5s forwards;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--secondary);
+        }
+
+        .testimonial-controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .testimonial-btn {
+            background: var(--glass);
+            border: 2px solid var(--secondary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-btn:hover {
+            background: var(--secondary);
+            color: var(--text-light);
+        }
+
+        .contact-section {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 2px solid var(--secondary);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 commission 30px var(--shadow);
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact-input, .contact-textarea {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid var(--accent);
+            border-radius: 12px;
+            padding: 15px;
+            color: var(--text-light);
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        .contact-input:focus, .contact-textarea:focus {
+            outline: none;
+            border-color: var(--secondary);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 10px var(--glow);
+        }
+
+        .contact-textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: none;
+            padding: 15px 30px;
+            border-radius: 12px;
+            color: var(--text-light);
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 4px 15px var(--shadow);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px var(--glow);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .social-link {
+            font-size: 2em;
+            color: var(--text-light);
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            color: var(--secondary);
+            transform: scale(1.2);
+        }
+
+        footer {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border-top: 2px solid var(--secondary);
+            padding: 20px;
+            text-align: center;
+            color: var(--text-light);
+            font-size: 0.95em;
+            margin-top: auto;
+        }
+
+        footer a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: var(--text-light);
+        }
+
+        @media (max-width: 1024px) {
+            .nav-bar {
+                gap: 15px;
+                padding: 10px 20px;
+            }
+
+            .nav-item {
+                font-size: 0.9em;
+                padding: 8px 15px;
+            }
+
+            .hero {
+                padding: 100px 15px 50px;
+            }
+
+            .hero-title {
+                font-size: clamp(2.5rem, 6vw, 4rem);
+            }
+
+            .skills-grid, .projects-grid, .certifications-grid, .testimonials-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-bar {
+                position: fixed;
+                bottom: 15px;
+                top: auto;
+                left: 15px;
+                right: 15px;
+                transform: none;
+                justify-content: space-around;
+                gap: 10px;
+                padding: 8px;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+            }
+
+            .nav-item {
+                font-size: 0.85em;
+                padding: 8px 12px;
+            }
+
+            .hero {
+                padding: 80px 15px 40px;
+            }
+
+            .hero-title {
+                font-size: clamp(2rem, 5vw, 3.5rem);
+            }
+
+            .section-title {
+                font-size: 2em;
+            }
+
+            .contact-section {
+                padding: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .skills-grid, .projects-grid, .certifications-grid, .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card, .about-card, .testimonial-card {
+                padding: 20px;
+            }
+
+            .card-title {
+                font-size: 1.4em;
+            }
+
+            .btn {
+                padding: 12px 20px;
+                font-size: 0.9em;
+            }
+
+            .social-link {
+                font-size: 1.8em;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <div class="tech-background">
+        <div class="particles" id="particles"></div>
+    </div>
+
+    <nav class="nav-bar">
+        <div class="nav-item active" data-section="home">Home</div>
+        <div class="nav-item" data-section="about">About</div>
+        <div class="nav-item" data-section="skills">Skills</div>
+        <div class="nav-item" data-section="projects">Projects</div>
+        <div class="nav-item" data-section="testimonials">Testimonials</div>
+        <div class="nav-item" data-section="certifications">Certifications</div>
+        <div class="nav-item" data-section="contact">Contact</div>
+    </nav>
+
+    <div class="main-container">
+        <section class="hero">
+            <h1 class="hero-title">Umar Jafar</h1>
+            <p class="hero-subtitle">Blockchain Developer | Smart Contract Engineer | Web3 Enthusiast</p>
+        </section>
+
+        <div class="container">
+            <section class="section" id="about">
+                <h2 class="section-title">About Me</h2>
+                <div class="about-card fade-in-up">
+                    <div class="card-header">
+                        <div class="card-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <h3 class="card-title">Umar Jafar</h3>
+                    </div>
+                    <p class="about-text">
+                        I'm Umar Jafar, a passionate <span class="highlight-text">blockchain developer</span> dedicated to building secure and scalable decentralized applications. With expertise in <span class="highlight-text">smart contract development, Web3 integration, and blockchain protocols</span>, I create innovative solutions for the decentralized world. My mission is to leverage blockchain technology to solve real-world problems, ensuring transparency and security in every project.
+                    </p>
+                </div>
+            </section>
+
+            <section class="section" id="skills">
+                <h2 class="section-title">Skills</h2>
+                <div class="skills-grid">
+                    <div class="card fade-in-up">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-code"></i></div>
+                            <h3 class="card-title">Smart Contract Development</h3>
+                        </div>
+                        <div class="card-content">
+                            <p class="card-description">Proficient in Solidity and Rust for developing secure smart contracts on Ethereum and other blockchains.</p>
+                        </div>
+                    </div>
+                    <div class="card fade-in-up">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-link"></i></div>
+                            <h3 class="card-title">Web3 Integration</h3>
+                        </div>
+                        <div class="card-content">
+                            <p class="card-description">Skilled in Web3.js, Ethers.js, and integrating DApps with blockchain networks.</p>
+                        </div>
+                    </div>
+                    <div class="card fade-in-up">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-database"></i></div>
+                            <h3 class="card-title">Blockchain Protocols</h3>
+                        </div>
+                        <div class="card-content">
+                            <p class="card-description">Experienced with Ethereum, Binance Smart Chain, Polygon, and Solana ecosystems.</p>
+                        </div>
+                    </div>
+                    <div class="card fade-in-up">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-shield-alt"></i></div>
+                            <h3 class="card-title">Blockchain Security</h3>
+                        </div>
+                        <div class="card-content">
+                            <p class="card-description">Knowledgeable in auditing smart contracts and implementing security best practices.</p>
+                        </div>
+                    </div>
+                    <div class="card fade-in-up">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-globe"></i></div>
+                            <h3 class="card-title">Web Development</h3>
+                        </div>
+                        <div class="card-content">
+                            <p class="card-description">Expert in HTML, CSS, JavaScript, and React for building responsive DApp frontends.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="projects">
+                <h2 class="section-title">Projects</h2>
+                <div class="projects-grid">
+                    <div class="card fade-in-up">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-wallet"></i></div>
+                            <h3 class="card-title">Decentralized Exchange</h3>
+                        </div>
+                        <div class="card-content">
+                            <p class="card-description">A DEX built with Solidity and React, enabling secure token swaps on Ethereum.</p>
+                            <a href="https://github.com/umarjafar/dex" target="_blank" class="project-link">View Project</a>
+                        </div>
+                    </div>
+                    <div class="card fade-in-up">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-vote-yea"></i></div>
+                            <h3 class="card-title">DAO Platform</h3>
+                        </div>
+                        <div class="card-content">
+                            <p class="card-description">A decentralized governance platform using smart contracts for transparent voting.</p>
+                            <a href="https://github.com/umarjafar/dao" target="_blank" class="project-link">View Project</a>
+                        </div>
+                    </div>
+                    <div class="card fade-in-up">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-coins"></i></div>
+                            <h3 class="card-title">NFT Marketplace</h3>
+                        </div>
+                        <div class="card-content">
+                            <p class="card-description">A marketplace for minting and trading NFTs, built with Solidity and Web3.js.</p>
+                            <a href="https://github.com/umarjafar/nft-marketplace" target="_blank" class="project-link">View Project</a>
+                        </div>
+                    </div>
+                    <div class="card fade-in-up">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-lock"></i></div>
+                            <h3 class="card-title">Smart Contract Audit Tool</h3>
+                        </div>
+                        <div class="card-content">
+                            <p class="card-description">A Python-based tool for analyzing smart contract vulnerabilities.</p>
+                            <a href="https://github.com/umarjafar/audit-tool" target="_blank" class="project-link">View Project</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="testimonials">
+                <h2 class="section-title">Testimonials</h2>
+                <div class="testimonials-container">
+                    <div class="testimonials-slider" id="testimonialsSlider">
+                        <div class="testimonial-card">
+                            <p class="testimonial-text">"Umar's expertise in blockchain development transformed our project. His smart contracts are secure and efficient!"</p>
+                            <p class="testimonial-author">Ahmed Bello, CEO of CryptoVentures</p>
+                        </div>
+                        <div class="testimonial-card">
+                            <p class="testimonial-text">"The DAO platform Umar built was a game-changer for our community governance."</p>
+                            <p class="testimonial-author">Fatima Yusuf, Project Lead</p>
+                        </div>
+                        <div class="testimonial-card">
+                            <p class="testimonial-text">"Umar's NFT marketplace is user-friendly and robust, exceeding our expectations!"</p>
+                            <p class="testimonial-author">BlockChain Innovators Team</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-controls">
+                        <button class="testimonial-btn" onclick="prevTestimonialIFY()"><i class="fas fa-chevron-left"></i></button>
+                        <button class="testimonial-btn" onclick="nextTestimonialIFY()"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="certifications">
+                <h2 class="section-title">Certifications</h2>
+                <div class="certifications-grid">
+                    <div class="card fade-in-up">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-certificate"></i></div>
+                            <h3 class="card-title">Certified Blockchain Developer</h3>
+                        </div>
+                        <div class="card-content">
+                            <p class="card-description">Earned in 2025, validating expertise in blockchain development and smart contracts from Blockchain Council.</p>
+                        </div>
+                    </div>
+                    <div class="card fade-in-up">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-certificate"></i></div>
+                            <h3 class="card-title">Solidity Developer Certification</h3>
+                        </div>
+                        <div class="card-content">
+                            <p class="card-description">Completed a course on Solidity for smart contract development from ConsenSys Academy.</p>
+                        </div>
+                    </div>
+                    <div class="card fade-in-up">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-certificate"></i></div>
+                            <h3 class="card-title">Web3 Development</h3>
+                        </div>
+                        <div class="card-content">
+                            <p class="card-description">Certified in Web3.js and Ethers.js for building decentralized applications.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="contact">
+                <h2 class="section-title">Get in Touch</h2>
+                <div class="contact-section fade-in-up">
+                    <p class="card-description text-center mb-6">Let's collaborate on your next blockchain project! Drop me a message, and I'll get back to you soon.</p>
+                    <div class="contact-form" id="contactForm">
+                        <input type="text" class="contact-input" placeholder="Your Name" id="name">
+                        <input type="email" class="contact-input" placeholder="Your Email" id="email">
+                        <textarea class="contact-textarea" placeholder="Your Message" id="message" rows="6"></textarea>
+                        <button class="btn" onclick="sendMessage()">Send Message <i class="fas fa-paper-plane ml-2"></i></button>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://wa.me/+234 906 456 4293" target="_blank" class="social-link" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://x.com/umarjafar" target="_blank" class="social-link" title="X"><i class="fab fa-x-twitter"></i></a>
+                        <a href="https://linkedin.com/in/umarjafar" target="_blank" class="social-link" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="mailto:umarjafar@gmail.com" class="social-link" title="Gmail"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <footer>
+        Built with passion by <a href="https://wa.me/+2348128197651" target="_blank">Sisco Ask</a> | © 2025
+    </footer>
+
+    <script>
+        function initializeApp() {
+            createParticles();
+            setupEventListeners();
+            setupTestimonialSlider();
+        }
+
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.width = `${Math.random() * 3 + 1}px`;
+                particle.style.height = particle.style.width;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                particle.style.animationDuration = `${Math.random() * 10 + 10}s`;
+                particle.style.animationDelay = `${Math.random() * 5}s`;
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        let currentTestimonial = 0;
+        const testimonials = document.querySelectorAll('.testimonial-card');
+        const totalTestimonials = testimonials.length;
+
+        function setupTestimonialSlider() {
+            testimonials[currentTestimonial].style.opacity = '1';
+            setInterval(nextTestimonialIFY, 5000); // Auto-slide every 5 seconds
+        }
+
+        function nextTestimonialIFY() {
+            testimonials[currentTestimonial].style.opacity = '0';
+            currentTestimonial = (currentTestimonial + 1) % totalTestimonials;
+            testimonials[currentTestimonial].style.opacity = '1';
+            document.getElementById('testimonialsSlider').style.transform = `translateX(-${currentTestimonial * 100}%)`;
+        }
+
+        function prevTestimonialIFY() {
+            testimonials[currentTestimonial].style.opacity = '0';
+            currentTestimonial = (currentTestimonial - 1 + totalTestimonials) % totalTestimonials;
+            testimonials[currentTestimonial].style.opacity = '1';
+            document.getElementById('testimonialsSlider').style.transform = `translateX(-${currentTestimonial * 100}%)`;
+        }
+
+        function setupEventListeners() {
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+                    item.classList.add('active');
+                    const section = document.getElementById(item.dataset.section);
+                    if (section) {
+                        section.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+
+            document.addEventListener('scroll', () => {
+                const elements = document.querySelectorAll('.card, .about-card, .section-title, .contact-section, .testimonial-card');
+                elements.forEach(element => {
+                    const rect = element.getBoundingClientRect();
+                    if (rect.top < window.innerHeight * 0.85 && rect.bottom > 0) {
+                        element.classList.add('fade-in-up');
+                    }
+                });
+            });
+
+            if ('ontouchstart' in window) {
+                document.querySelectorAll('.btn, .social-link, .testimonial-btn').forEach(element => {
+                    element.addEventListener('touchstart', function(e) {
+                        e.stopPropagation();
+                        this.style.transform = 'scale(0.95)';
+                    });
+                    element.addEventListener('touchend', function(e) {
+                        e.stopPropagation();
+                        this.style.transform = '';
+                    });
+                });
+            }
+        }
+
+        function sendMessage() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            const phoneNumber = '+2341234567890'; // Replace with actual WhatsApp number
+
+            if (name && email && message) {
+                const whatsappMessage = `Hello Umar, I'm ${name} (${email}). ${message}`;
+                const encodedMessage = encodeURIComponent(whatsappMessage);
+                const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodedMessage}`;
+                
+                const iframe = document.createElement('iframe');
+                iframe.style.display = 'none';
+                iframe.src = whatsappUrl;
+                document.body.appendChild(iframe);
+                
+                alert(`Thank you, ${name}! Your message has been sent via WhatsApp. I'll get back to you soon!`);
+                
+                document.getElementById('name').value = '';
+                document.getElementById('email').value = '';
+                document.getElementById('message').value = '';
+                
+                setTimeout(() => {
+                    document.body.removeChild(iframe);
+                }, 1000);
+            } else {
+                alert('Please fill in all fields to send a message.');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', initializeApp);
+    </script>
+</body>
+</html>
